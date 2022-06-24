@@ -69,7 +69,6 @@ void task27()
 
 void PrintArray(int[] coll)
 {
-    Console.Write("\nСгенерирован массив: ");
     for (int i = 0; i < coll.Length; i++)
     {
         Console.Write(coll[i] + " ");
@@ -85,6 +84,7 @@ void task29()
     {
         array[i] = new Random().Next(0,100);
     }
+    Console.Write("\nСгенерирован массив: ");
     PrintArray(array);
 
     // Console.Write("\nСгенерирован массив: ");
