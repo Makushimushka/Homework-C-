@@ -93,6 +93,24 @@ void task50()
         if (value == 111) break; // если есть то определит перед выходом
     }
 }
+
+void task50_2()
+{
+    Console.Clear();
+    Console.WriteLine(ourtask50+"\n");
+    double[,] massiv = getMatrix(4, 4, -10, 10, 0);
+    printMatrix(massiv);
+    Console.Write("Введите индекс строки для вывода элемента: ");
+    int i = int.Parse(Console.ReadLine());
+    Console.Write("Введите индекс столбца для вывода элемента: ");
+    int j = int.Parse(Console.ReadLine());
+
+    if (i < 0 || i > massiv.GetLength(0)) Console.WriteLine(
+        "В данной матрице отсутствует строка с таким индексом: ");
+    else if (j < 0 || j > massiv.GetLength(1)) Console.WriteLine(
+        "В данной матрице отсутствует столбец с таким индексом: ");
+    else Console.WriteLine($"Значению индексов строки {i} и столбца {j} соответствует элемент: {massiv[i,j]}");
+}
  
 
 
@@ -168,10 +186,12 @@ while (flag == true)
 
 {
     Console.WriteLine();
-    Console.WriteLine("Введите номер задачи из списка [47, 50, 52] 111 - для выхода: ");
+    Console.WriteLine("Введите номер задачи из списка [47, 50, 500 - для 50 задачи решение с индексами, 52]\n"+
+                      "111 - для выхода: ");
     int task_number = int.Parse(Console.ReadLine());
     if (task_number == 47) task47();
     else if (task_number == 50) task50();
+    else if (task_number == 500) task50_2();
     else if (task_number == 52) task52();
     else if (task_number == 111) flag = false;
     else Console.WriteLine("Введите корректный номер задачи");
