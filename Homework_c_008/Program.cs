@@ -68,6 +68,8 @@ void sortMatrix(double[,] matrix)
     }
 }
 
+
+Console.WriteLine("\n Задача 54\n");
 double[,] ourmatrix = getMatrix(4, 4, 0, 100, 0);
 printMatrix(ourmatrix);
 sortMatrix(ourmatrix);
@@ -80,6 +82,7 @@ printMatrix(ourmatrix);
 
 void task56()
 {
+    Console.WriteLine("\n Задача 56\n");
     double[,] ourmatrix = getMatrix(4, 4, 0, 100, 0);
     double[] result = new double[ourmatrix.GetLength(0)];
     int minelementindex = 0;
@@ -148,9 +151,39 @@ matrixMultiplication(matrixAA, matrixBB);
 двузначных чисел. Напишите программу, которая будет построчно выводить
 массив, добавляя индексы каждого элемента. */
 
+Console.WriteLine("Задача 60");
+int[,,] array = new int [3,3,3];
+int values = 10;
+Random random = new Random();
+for (int i = 0; i < array.GetLength(0); i++)
+{
+    for (int j = 0; j < array.GetLength(1); j++)
+    {
+        for (int k = 0; k < array.GetLength(2); k++)
+        {
+            values += 1;
+            array[i, j, k] = values;
+        }
+    }
+}
+
+for (int i = 0; i < array.GetLength(0); i++)
+{
+    Console.WriteLine($"вывод страницы {i}");
+    for (int j = 0; j < array.GetLength(1); j++)
+    {
+        Console.Write($"вывод строки {j}: ");
+        for (int k = 0; k < array.GetLength(2); k++)
+        {
+            Console.Write($"|{k} : {+array[i, j, k]}|");
+        }
+        Console.WriteLine();
+    }
+    Console.WriteLine("\n_______");
+}
 
 /* Задача 62: Заполните спирально массив 4 на 4. */
-Console.WriteLine("Задача 62:");
+Console.WriteLine("\nЗадача 62:");
 
 double[,] newmatrix = new double[4,4];
 int row = 0;
