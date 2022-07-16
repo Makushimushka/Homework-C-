@@ -10,36 +10,74 @@ for (int i = 0; i < n; i++)
     persons[i] = i+1;
 }
 
-
-
-int m = 1;
-int[] temp = new int[5];
-int indtemp = 0;
-
-
-int[] check(int value, int[] array)
+void PrintArray(int[] array, string message)
 {
-    
-    for (int i = 0; i < array.Length; i++)
+    Console.Write(message);
+    for (int i = 0; i < n; i++)
     {
-        int[] temp = new int[array.Length];
-        int index = 0;
-        if (array[i] % value != 0 || array[i] / value == 1)
-        {
-            index++;
-            temp[index] = array[i];
-            Console.Write(temp[index] + " ");
-        }
-        
-
-        else return temp;
+        Console.Write(array[i] + " ");
     }
-    return temp;
-
 }
 
-Console.WriteLine(check(persons[2], persons));
-/* for (int i = 0; i < persons.Length; i++)
+int maxMin(int firstvalue, int secondvalue, string minmax)
 {
-    if (check(persons[i], persons)) Console.Write(persons[i]);
-}  */
+    if (minmax.ToLower() == "min")
+    {
+        if (firstvalue <= secondvalue) return firstvalue;
+        else return secondvalue;
+    }
+    if (minmax.ToLower() == "max")
+    {
+        if (firstvalue >= secondvalue) return firstvalue;
+        else return secondvalue;
+    }
+    else return 0;
+}
+
+//Console.Write(maxMin(4, 5, "min"));
+
+
+
+int m = 1; // количество групп
+int[] temp; // временный массив
+temp = new int[persons.Length]; 
+int indtemp = 0;
+temp[indtemp] = persons[1]; // присваиваем первому элементу временного массива первое значение массива с данными
+persons[indtemp] = 0; 
+
+for (int ipers = 1; ipers < 9; ipers++) //persons.Length
+{
+    
+
+    //Проверяем, что не использовали элемент в предидущей группе.
+    for (int jpers = 0; jpers < persons.Length; jpers++)
+    {
+        if (persons[ipers] != 0 && persons[jpers] != 0 &&
+            persons[ipers] != persons[jpers] &&
+            maxMin(persons[ipers], persons[jpers], "max") % maxMin(persons[ipers], persons[jpers], "min") != 0)
+            {
+                //Console.WriteLine($"{indtemp} {persons[jpers]}");
+                for (int itemp = 0; itemp < temp.Length; itemp++)
+                {
+                    if (
+                        temp[itemp] != 0 && persons[jpers] != 0 &&
+                        temp[itemp] != persons[jpers] && 
+                        maxMin(temp[itemp], persons[jpers], "max") % maxMin(temp[itemp], persons[jpers], "min") != 0
+                        )
+                        {
+                            indtemp++;
+                            temp[indtemp] = persons[jpers];
+                            persons[jpers] = 0;
+                            //Console.WriteLine($"{indtemp} {persons[jpers]}");
+                        }
+                }
+
+
+            }
+
+        }
+    
+}
+
+
+PrintArray(temp, "message ");
