@@ -2,7 +2,10 @@
 чисел на группы, так чтобы в одной группе все числа были взаимно просты (все
 числа в группе друг на друга не делятся)? Найдите M при заданном N и получите
 одно из разбиений на группы N ≤ 10²⁰. */
-int n = 50;
+
+
+Console.Write("Введите N: ");
+int n = int.Parse(Console.ReadLine());;
 int[] persons = new int[n];
 
 for (int i = 0; i < n; i++)
@@ -15,8 +18,10 @@ void PrintArray(int[] array, string message)
     Console.Write(message);
     for (int i = 0; i < n; i++)
     {
+        if (array[i] == 0) continue;
         Console.Write(array[i] + " ");
     }
+    Console.WriteLine(" ");
 }
 
 int maxMin(int firstvalue, int secondvalue, string minmax)
@@ -38,46 +43,56 @@ int maxMin(int firstvalue, int secondvalue, string minmax)
 
 
 
-int m = 1; // количество групп
-int[] temp; // временный массив
-temp = new int[persons.Length]; 
-int indtemp = 0;
-temp[indtemp] = persons[1]; // присваиваем первому элементу временного массива первое значение массива с данными
-persons[indtemp] = 0; 
+int m = 1; 
+int[] temp; 
+bool condition;
+int indtemp;
+ 
 
-for (int ipers = 1; ipers < 9; ipers++) //persons.Length
+
+for (int ipers = 0; ipers < persons.Length; ipers++) //persons.Length
 {
+    if (persons[ipers] == 0) continue;
+    temp = new int[persons.Length];
+    indtemp = 0;
+    temp[indtemp] = persons[ipers];
+    persons[ipers] = 0;
     
+     // присваиваем первому элементу временного массива первое значение массива с данными
 
-    //Проверяем, что не использовали элемент в предидущей группе.
     for (int jpers = 0; jpers < persons.Length; jpers++)
     {
-        if (persons[ipers] != 0 && persons[jpers] != 0 &&
-            persons[ipers] != persons[jpers] &&
-            maxMin(persons[ipers], persons[jpers], "max") % maxMin(persons[ipers], persons[jpers], "min") != 0)
+        condition = true;
+        if (persons[jpers] == 0) continue; // если ноль выходим из цикла
+        if (
+            //persons[ipers] != 0 && persons[jpers] != 0 &&
+            temp[indtemp] != persons[jpers] &&
+            maxMin(temp[indtemp], persons[jpers], "max") % maxMin(temp[indtemp], persons[jpers], "min") != 0)
             {
-                //Console.WriteLine($"{indtemp} {persons[jpers]}");
+
                 for (int itemp = 0; itemp < temp.Length; itemp++)
                 {
+                    if (temp[itemp] == 0 || persons[jpers] == 0) continue; 
                     if (
-                        temp[itemp] != 0 && persons[jpers] != 0 &&
                         temp[itemp] != persons[jpers] && 
                         maxMin(temp[itemp], persons[jpers], "max") % maxMin(temp[itemp], persons[jpers], "min") != 0
-                        )
-                        {
-                            indtemp++;
-                            temp[indtemp] = persons[jpers];
-                            persons[jpers] = 0;
-                            //Console.WriteLine($"{indtemp} {persons[jpers]}");
-                        }
+                        );
+                    else condition = false;
                 }
-
+                if(condition == true )
+                {
+                    indtemp++;
+                    temp[indtemp] = persons[jpers];
+                    persons[jpers] = 0;
+                }
 
             }
 
-        }
-    
+
+    }
+    PrintArray(temp, $"Группа {m}: ");
+    m++;
 }
 
 
-PrintArray(temp, "message ");
+//PrintArray(temp, "message ");
