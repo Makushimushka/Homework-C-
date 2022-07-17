@@ -64,17 +64,13 @@ for (int ipers = 0; ipers < persons.Length; ipers++) //persons.Length
     {
         condition = true;
         if (persons[jpers] == 0) continue; // если ноль выходим из цикла
-        if (
-            //persons[ipers] != 0 && persons[jpers] != 0 &&
-            temp[indtemp] != persons[jpers] &&
+        if (temp[indtemp] != persons[jpers] &&
             maxMin(temp[indtemp], persons[jpers], "max") % maxMin(temp[indtemp], persons[jpers], "min") != 0)
             {
-
                 for (int itemp = 0; itemp < temp.Length; itemp++)
                 {
                     if (temp[itemp] == 0 || persons[jpers] == 0) continue; 
-                    if (
-                        temp[itemp] != persons[jpers] && 
+                    if (temp[itemp] != persons[jpers] && 
                         maxMin(temp[itemp], persons[jpers], "max") % maxMin(temp[itemp], persons[jpers], "min") != 0
                         );
                     else condition = false;
@@ -85,14 +81,8 @@ for (int ipers = 0; ipers < persons.Length; ipers++) //persons.Length
                     temp[indtemp] = persons[jpers];
                     persons[jpers] = 0;
                 }
-
             }
-
-
     }
     PrintArray(temp, $"Группа {m}: ");
     m++;
 }
-
-
-//PrintArray(temp, "message ");
