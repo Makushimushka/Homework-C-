@@ -3,7 +3,6 @@
 числа в группе друг на друга не делятся)? Найдите M при заданном N и получите
 одно из разбиений на группы N ≤ 10²⁰. */
 
-
 Console.Write("Введите N: ");
 int n = int.Parse(Console.ReadLine());;
 int[] persons = new int[n];
@@ -39,16 +38,11 @@ int maxMin(int firstvalue, int secondvalue, string minmax)
     else return 0;
 }
 
-//Console.Write(maxMin(4, 5, "min"));
-
-
-
 int m = 1; 
 int[] temp; 
 bool condition;
 int indtemp;
  
-
 
 for (int ipers = 0; ipers < persons.Length; ipers++) //persons.Length
 {
